@@ -1,5 +1,9 @@
 module.exports = function tictactoeCommandHandler(events) {
-  var gameCreatedEvent = events[0];
+
+    var tictactoeState = {
+        gameCreatedEvent: events[0],
+        grid: [["", "", ""], ["", "", ""], ["", "", ""]]
+    }
 
   var handlers = {
     "CreateGame": function (cmd) {
@@ -14,7 +18,7 @@ module.exports = function tictactoeCommandHandler(events) {
     },
     "JoinGame": function (cmd) {
       {
-        if (gameCreatedEvent === undefined) {
+        if (!tictactoeState.gameCreatedEvent) {
           return [{
             id: cmd.id,
             event: "GameDoesNotExist",
@@ -26,7 +30,7 @@ module.exports = function tictactoeCommandHandler(events) {
           id: cmd.id,
           event: "GameJoined",
           userName: cmd.userName,
-          otherUserName: gameCreatedEvent.userName,
+          otherUserName: tictactoeState.gameCreatedEvent.userName,
           timeStamp: cmd.timeStamp
         }];
       }
