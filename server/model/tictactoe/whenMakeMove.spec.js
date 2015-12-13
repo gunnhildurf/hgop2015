@@ -78,10 +78,10 @@ describe('make move command', function(){
             moveRow: 0,
             moveColumn: 2,
             player: "Gunnhildur",
+            nextPlayer: "Anna",
             gameWon: false,
             gameDraw: false
         }];
-        
 
         var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
 
@@ -110,6 +110,8 @@ describe('make move command', function(){
             event:"MadeMove",
             moveRow: 0,
             moveColumn: 1,
+            mark: "X",
+            player: "Anna",
             nextPlayer: "Gunnhildur",
             gameWon: false,
             gameDraw: false}];
@@ -127,10 +129,11 @@ describe('make move command', function(){
             moveRow: 0,
             moveColumn: 1,
             player: "Gunnhildur",
-            nextPlayer: "Anna",
+            nextPlayer: "Gunnhildur",
             gameWon: false,
             gameDraw: false
         }];
+
 
         var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
 

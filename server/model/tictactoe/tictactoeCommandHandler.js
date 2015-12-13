@@ -75,19 +75,19 @@ module.exports = function tictactoeCommandHandler(events) {
 
             }
 
-            /*
             if(tictactoeState.grid[cmd.row][cmd.column] !== ""){
                 return [{
                     id:cmd.id,
                     event:"IllegalMove",
                     moveRow: cmd.row,
                     moveColumn: cmd.column,
+                    player: cmd.currentPlayer,
                     nextPlayer: cmd.currentPlayer,
                     gameWon: false,
                     gameDraw: false
                 }];
             }
-            */
+
 
             if(tictactoeState.turn !== cmd.currentPlayer){
                 return [{
@@ -96,6 +96,7 @@ module.exports = function tictactoeCommandHandler(events) {
                     moveRow: cmd.row,
                     moveColumn: cmd.column,
                     player: cmd.currentPlayer,
+                    nextPlayer: cmd.nextPlayer,
                     gameWon: false,
                     gameDraw: false
                 }];
@@ -126,7 +127,7 @@ module.exports = function tictactoeCommandHandler(events) {
             }
 
 
-            //tictactoeState.turn = cmd.nextPlayer;
+            tictactoeState.turn = cmd.nextPlayer;
 
 
             return [{
