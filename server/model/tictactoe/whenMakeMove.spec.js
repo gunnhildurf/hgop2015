@@ -4,7 +4,6 @@ describe('make move command', function(){
 
     var given, when, then;
 
-
     it('should make move',function(){
         given= [{
             id:"12347",
@@ -36,6 +35,8 @@ describe('make move command', function(){
             event:"MadeMove",
             moveRow: 0,
             moveColumn: 1,
+            mark: "X",
+            player: "Gunnhildur",
             nextPlayer: "Anna",
             gameWon: false,
             gameDraw: false
@@ -76,10 +77,11 @@ describe('make move command', function(){
             event:"IllegalMove",
             moveRow: 0,
             moveColumn: 2,
-            nextPlayer: "Anna",
+            player: "Gunnhildur",
             gameWon: false,
             gameDraw: false
         }];
+        
 
         var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
 
@@ -124,12 +126,14 @@ describe('make move command', function(){
             event:"IllegalMove",
             moveRow: 0,
             moveColumn: 1,
-            nextPlayer: "Gunnhildur",
+            player: "Gunnhildur",
+            nextPlayer: "Anna",
             gameWon: false,
             gameDraw: false
         }];
 
         var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
+
 
         JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
     });

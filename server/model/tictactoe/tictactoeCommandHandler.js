@@ -1,10 +1,10 @@
 
-var tictactoeState = {
-    grid: [["", "", ""], ["", "", ""], ["", "", ""]],
-    turn: ""
-}
-
 module.exports = function tictactoeCommandHandler(events) {
+
+    var tictactoeState = {
+        grid: [["", "", ""], ["", "", ""], ["", "", ""]],
+        turn: ""
+    }
 
     var gameCreatedEvent = events[0];
 
@@ -58,6 +58,24 @@ module.exports = function tictactoeCommandHandler(events) {
         },
         "MakeMove": function (cmd) {
 
+            var secondUser = "0";
+
+
+            for(var i = 0; i < events.length; i = i + 1){
+
+                if(events[i].event === "GameJoined"){
+                    tictactoeState.turn = events[i].turn;
+                    secondUser = events[i].otherUserName;
+                }
+
+                if(events[i].event === "MadeMove"){
+                    tictactoeState.grid[events[i].moveRow][events[i].moveColumn] = events[i].mark;
+                    tictactoeState.turn = events[i].nextPlayer;
+                }
+
+            }
+
+            /*
             if(tictactoeState.grid[cmd.row][cmd.column] !== ""){
                 return [{
                     id:cmd.id,
@@ -69,6 +87,7 @@ module.exports = function tictactoeCommandHandler(events) {
                     gameDraw: false
                 }];
             }
+            */
 
             if(tictactoeState.turn !== cmd.currentPlayer){
                 return [{
@@ -76,28 +95,38 @@ module.exports = function tictactoeCommandHandler(events) {
                     event:"IllegalMove",
                     moveRow: cmd.row,
                     moveColumn: cmd.column,
-                    nextPlayer: tictactoeState.turn,
+                    player: cmd.currentPlayer,
                     gameWon: false,
                     gameDraw: false
                 }];
             }
 
+            var mark = "";
+            var next = "";
 
             if(cmd.currentPlayer === gameCreatedEvent.userName && gameCreatedEvent.aPlayer === "X"){
                 tictactoeState.grid[cmd.row][cmd.column] = "X";
+                mark = "X";
+                next = secondUser;
             }
             else if(cmd.currentPlayer === gameCreatedEvent.userName && gameCreatedEvent.aPlayer === "O"){
                 tictactoeState.grid[cmd.row][cmd.column] = "O";
+                mark = "O";
+                next = secondUser;
             }
             else if(cmd.currentPlayer !== gameCreatedEvent.userName && gameCreatedEvent.bPlayer === "X"){
                 tictactoeState.grid[cmd.row][cmd.column] = "X";
+                mark = "X";
+                next = gameCreatedEvent.userName;
             }
             else if(cmd.currentPlayer !== gameCreatedEvent.userName && gameCreatedEvent.bPlayer === "O"){
                 tictactoeState.grid[cmd.row][cmd.column] = "O";
+                mark = "O";
+                next = gameCreatedEvent.userName;
             }
 
 
-            tictactoeState.turn = cmd.nextPlayer;
+            //tictactoeState.turn = cmd.nextPlayer;
 
 
             return [{
@@ -105,7 +134,9 @@ module.exports = function tictactoeCommandHandler(events) {
                 event:"MadeMove",
                 moveRow: cmd.row,
                 moveColumn: cmd.column,
-                nextPlayer: tictactoeState.turn,
+                mark: mark,
+                player: cmd.currentPlayer,
+                nextPlayer: next,
                 gameWon: false,
                 gameDraw: false
             }];
@@ -118,3 +149,9 @@ module.exports = function tictactoeCommandHandler(events) {
         }
     };
 };
+
+/* helper functions */
+
+
+function readVertical() {
+}
