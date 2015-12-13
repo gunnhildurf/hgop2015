@@ -45,7 +45,7 @@ describe('make move command', function(){
 
         JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
     });
-    it('should indicate who\'s turn it is',function(){
+    it('should not let player move out of turn',function(){
         given= [{
             id:"12348",
             event:"GameCreated",
@@ -68,15 +68,15 @@ describe('make move command', function(){
             gameCommand:"MakeMove",
             row: 0,
             column: 2,
-            currentPlayer: "Anna",
-            nextPlayer: "Gunnhildur"
+            currentPlayer: "Gunnhildur",
+            nextPlayer: "Anna"
         };
         then=[{
             id:"12348",
-            event:"MadeMove",
+            event:"IllegalMove",
             moveRow: 0,
             moveColumn: 2,
-            nextPlayer: "Gunnhildur",
+            nextPlayer: "Anna",
             gameWon: false,
             gameDraw: false
         }];
@@ -128,7 +128,6 @@ describe('make move command', function(){
             gameWon: false,
             gameDraw: false
         }];
-
 
         var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
 

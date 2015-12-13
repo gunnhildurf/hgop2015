@@ -9,7 +9,7 @@ describe('join game command', function(){
         given= [{
             id:"1234",
             event:"GameCreated",
-            userName: "Gulli",
+            userName: "Gunnhildur",
             bPlayer: "O",
             timeStamp: "2015.12.02T11:29:44"
         }];
@@ -23,13 +23,12 @@ describe('join game command', function(){
         then=[{
             id:"12345",
             event:"GameJoined",
-            userName: "Gulli",
+            userName: "Gunnhildur",
             otherUserName: "Halli",
             bPlayer: "O",
-            turn: "Gulli",
+            turn: "Gunnhildur",
             timeStamp: "2015.12.02T11:30:50"
         }];
-
 
         var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
 
