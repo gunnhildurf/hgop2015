@@ -3,7 +3,8 @@ module.exports = function tictactoeCommandHandler(events) {
     var tictactoeState = {
         gameCreatedEvent: events[0],
         grid: [["", "", ""], ["", "", ""], ["", "", ""]],
-        gameOver: false
+        gameOver: false,
+        turn: ""
     }
 
     var handlers = {
@@ -34,38 +35,48 @@ module.exports = function tictactoeCommandHandler(events) {
                     return [{
                         id: cmd.id,
                         event: "GameDoesNotExist",
-                        userName: cmd.userName,
+                        otherUserName: cmd.otherUserName,
                         timeStamp: cmd.timeStamp
                     }];
                 }
+                if(tictactoeState.gameCreatedEvent.bPlayer==="X"){
+                    tictactoeState.turn = cmd.otherUserName;
+                } else {
+                    tictactoeState.turn = tictactoeState.gameCreatedEvent.userName;
+                }
+
                 return [{
                     id: cmd.id,
                     event: "GameJoined",
                     userName: tictactoeState.gameCreatedEvent.userName,
-                    otherUserName: cmd.userName,
-                    bPlayer: "O", //should not be hardcoded!
+                    otherUserName: cmd.otherUserName,
+                    bPlayer: tictactoeState.gameCreatedEvent.bPlayer,
+                    turn: tictactoeState.turn,
                     timeStamp: cmd.timeStamp
                 }];
             }
         },
         "MakeMove": function (cmd) {
-            var next = "";
-            //var mark = "";
 
-            if(cmd.currentPlayer === tictactoeState.gameCreatedEvent.userName) {
-                next = tictactoeState.gameCreatedEvent.otherUserName;
-                //mark = "X"
-            } else {
-                next = tictactoeState.gameCreatedEvent.userName;
-                //mark = "O"
-            }
+            /*
             //tictactoeState.grid[cmd.row][cmd.column] = mark;
+            */
+            /*
+            var turn = tictactoeState.turn;
 
+            if(cmd.currentPlayer !== turn){
+                id:cmd.id,
+                event:"IllegalMove",
+                currentPlayer: turn,
+                nextTurn: "Anna",
+                gameWon: false,
+                gameDraw: false
+            }
+            */
             return [{
-                id: cmd.id,
-                event: "MadeMoveX",
+                id:cmd.id,
+                event:"MadeMove",
                 currentPlayer: cmd.currentPlayer,
-                nextTurn: next,
                 gameWon: false,
                 gameDraw: false
             }];

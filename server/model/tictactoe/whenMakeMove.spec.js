@@ -4,25 +4,24 @@ describe('make move command', function(){
 
     var given, when, then;
 
-    it('should make first move',function(){
+    it('should make move',function(){
         given= [{
             id:"12345",
             event:"GameJoined",
-            userName: "Gulli",
-            otherUserName: "Halli"
+            userName: "Gunnhildur",
+            otherUserName: "Anna"
         }];
         when={
             id:"12345",
             gameCommand:"MakeMove",
             row: 0,
             column: 1,
-            currentPlayer: "Gulli"
+            currentPlayer: "Gunnhildur"
         };
         then=[{
             id:"12345",
-            event:"MadeMoveX",
-            currentPlayer: "Gulli",
-            nextTurn: "Halli",
+            event:"MadeMove",
+            currentPlayer: "Gunnhildur",
             gameWon: false,
             gameDraw: false
         }];

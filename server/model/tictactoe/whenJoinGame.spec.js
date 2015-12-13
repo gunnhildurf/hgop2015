@@ -10,13 +10,13 @@ describe('join game command', function(){
             id:"1234",
             event:"GameCreated",
             userName: "Gulli",
-            player: "X",
+            bPlayer: "O",
             timeStamp: "2015.12.02T11:29:44"
         }];
         when={
             id:"12345",
             gameCommand:"JoinGame",
-            userName : "Halli",
+            otherUserName : "Halli",
             name:"TheFirstGame",
             timeStamp: "2015.12.02T11:30:50"
         };
@@ -26,6 +26,7 @@ describe('join game command', function(){
             userName: "Gulli",
             otherUserName: "Halli",
             bPlayer: "O",
+            turn: "Gulli",
             timeStamp: "2015.12.02T11:30:50"
         }];
 
@@ -40,14 +41,14 @@ describe('join game command', function(){
         when={
             id:"12345",
             gameCommand:"JoinGame",
-            userName : "Halli",
+            otherUserName : "Halli",
             name:"TheFirstGame",
             timeStamp: "2015.12.02T11:30:55"
         };
         then=[{
             id:"12345",
             event:"GameDoesNotExist",
-            userName: "Halli",
+            otherUserName: "Halli",
             timeStamp: "2015.12.02T11:30:55"
         }];
 

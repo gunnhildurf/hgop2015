@@ -48,6 +48,7 @@ describe('create game command', function(){
             bPlayer: "O",
             timeStamp: "2015.12.02T10:29:44"
         }];
+        
 
         var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
 
