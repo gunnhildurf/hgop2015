@@ -1,12 +1,12 @@
+var grid = [["", "", ""], ["", "", ""], ["", "", ""]];
+
 module.exports = function tictactoeCommandHandler(events) {
 
     var tictactoeState = {
         gameCreatedEvent: events[0],
-        grid: [["", "", ""], ["", "", ""], ["", "", ""]],
-        gameOver: false,
+        //grid: [["", "", ""], ["", "", ""], ["", "", ""]],
         turn: ""
     }
-
     var handlers = {
         "CreateGame": function (cmd) {
             {
@@ -16,7 +16,6 @@ module.exports = function tictactoeCommandHandler(events) {
                 } else if(cmd.player === "O"){
                     bP = "X";
                 }
-
 
                 return [{
                     id: cmd.id,
@@ -58,25 +57,44 @@ module.exports = function tictactoeCommandHandler(events) {
         },
         "MakeMove": function (cmd) {
 
-            /*
-            //tictactoeState.grid[cmd.row][cmd.column] = mark;
-            */
-            /*
-            var turn = tictactoeState.turn;
-
-            if(cmd.currentPlayer !== turn){
-                id:cmd.id,
-                event:"IllegalMove",
-                currentPlayer: turn,
-                nextTurn: "Anna",
-                gameWon: false,
-                gameDraw: false
+            if(grid[cmd.row][cmd.column] !== ""){
+                return [{
+                    id:cmd.id,
+                    event:"IllegalMove",
+                    moveRow: cmd.row,
+                    moveColumn: cmd.column,
+                    nextPlayer: cmd.currentPlayer,
+                    gameWon: false,
+                    gameDraw: false
+                }];
             }
-            */
+
+
+
+
+            if(cmd.currentPlayer === tictactoeState.gameCreatedEvent.userName && tictactoeState.gameCreatedEvent.aPlayer === "X"){
+                grid[cmd.row][cmd.column] = "X";
+            }
+            else if(cmd.currentPlayer === tictactoeState.gameCreatedEvent.userName && tictactoeState.gameCreatedEvent.aPlayer === "O"){
+                grid[cmd.row][cmd.column] = "O";
+            }
+            else if(cmd.currentPlayer !== tictactoeState.gameCreatedEvent.userName && tictactoeState.gameCreatedEvent.bPlayer === "X"){
+                grid[cmd.row][cmd.column] = "X";
+            }
+            else if(cmd.currentPlayer !== tictactoeState.gameCreatedEvent.userName && tictactoeState.gameCreatedEvent.bPlayer === "O"){
+                grid[cmd.row][cmd.column] = "O";
+            }
+
+
+            tictactoeState.turn = cmd.nextPlayer;
+
+
             return [{
                 id:cmd.id,
                 event:"MadeMove",
-                currentPlayer: cmd.currentPlayer,
+                moveRow: cmd.row,
+                moveColumn: cmd.column,
+                nextPlayer: tictactoeState.turn,
                 gameWon: false,
                 gameDraw: false
             }];
