@@ -202,5 +202,162 @@ describe('make move command', function(){
 
         JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
     });
+    it('should detect horizontal victory',function(){
+        given= [{
+            id:"543210",
+            event:"GameCreated",
+            userName: "Alice",
+            gameName:"tictactoeOlympics",
+            aPlayer: "O",
+            bPlayer: "X",
+            timeStamp: "2015.12.02T10:29:44"
+        },{
+            id:"543210",
+            event:"GameJoined",
+            userName: "Alice",
+            otherUserName: "Bob",
+            bPlayer: "X",
+            turn: "Bob",
+            timeStamp: "2015.12.02T11:31:50"
+        },{
+            id:"543210",
+            event:"MadeMove",
+            moveRow: 2,
+            moveColumn: 1,
+            mark: "X",
+            player: "Bob",
+            nextPlayer: "Alice"
+        },{
+            id:"543210",
+            event:"MadeMove",
+            moveRow: 0,
+            moveColumn: 0,
+            mark: "O",
+            player: "Alice",
+            nextPlayer: "Bob"
+        },{
+            id:"543210",
+            event:"MadeMove",
+            moveRow: 1,
+            moveColumn: 0,
+            mark: "X",
+            player: "Bob",
+            nextPlayer: "Alice"
+        },{
+            id:"543210",
+            event:"MadeMove",
+            moveRow: 0,
+            moveColumn: 1,
+            mark: "O",
+            player: "Alice",
+            nextPlayer: "Bob"
+        },{
+            id:"543210",
+            event:"MadeMove",
+            moveRow: 2,
+            moveColumn: 0,
+            mark: "X",
+            player: "Bob",
+            nextPlayer: "Alice"}];
+        when={
+            id:"543210",
+            gameCommand:"MakeMove",
+            row: 0,
+            column: 2,
+            currentPlayer: "Alice",
+            nextPlayer: "Bob"
+        };
+        then=[{
+            id:"543210",
+            event:"GameWon",
+            moveRow: 0,
+            moveColumn: 2,
+            player: "Alice",
+            nextPlayer: ""
+        }];
+
+        var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
+
+        JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
+    });
+    it('should detect horizontal victory',function(){
+        given= [{
+            id:"543210",
+            event:"GameCreated",
+            userName: "Alice",
+            gameName:"tictactoeOlympics",
+            aPlayer: "O",
+            bPlayer: "X",
+            timeStamp: "2015.12.02T10:29:44"
+        },{
+            id:"543210",
+            event:"GameJoined",
+            userName: "Alice",
+            otherUserName: "Bob",
+            bPlayer: "X",
+            turn: "Bob",
+            timeStamp: "2015.12.02T11:31:50"
+        },{
+            id:"543210",
+            event:"MadeMove",
+            moveRow: 2,
+            moveColumn: 1,
+            mark: "X",
+            player: "Bob",
+            nextPlayer: "Alice"
+        },{
+            id:"543210",
+            event:"MadeMove",
+            moveRow: 0,
+            moveColumn: 0,
+            mark: "O",
+            player: "Alice",
+            nextPlayer: "Bob"
+        },{
+            id:"543210",
+            event:"MadeMove",
+            moveRow: 1,
+            moveColumn: 0,
+            mark: "X",
+            player: "Bob",
+            nextPlayer: "Alice"
+        },{
+            id:"543210",
+            event:"MadeMove",
+            moveRow: 0,
+            moveColumn: 1,
+            mark: "O",
+            player: "Alice",
+            nextPlayer: "Bob"
+        },{
+            id:"543210",
+            event:"MadeMove",
+            moveRow: 2,
+            moveColumn: 0,
+            mark: "X",
+            player: "Bob",
+            nextPlayer: "Alice"}];
+        when={
+            id:"543210",
+            gameCommand:"MakeMove",
+            row: 0,
+            column: 2,
+            currentPlayer: "Alice",
+            nextPlayer: "Bob"
+        };
+        then=[{
+            id:"543210",
+            event:"GameWon",
+            moveRow: 0,
+            moveColumn: 2,
+            player: "Alice",
+            nextPlayer: ""
+        }];
+
+        var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
+
+        JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
+    });
+
 
 });

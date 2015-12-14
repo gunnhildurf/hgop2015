@@ -60,8 +60,10 @@ module.exports = function tictactoeCommandHandler(events) {
         "MakeMove": function (cmd) {
 
             var secondUser = "";
+            var mark = "";
+            var next = "";
 
-
+            //set up test premise
             for(var i = 0; i < events.length; i = i + 1){
 
                 if(events[i].event === "GameJoined"){
@@ -76,6 +78,7 @@ module.exports = function tictactoeCommandHandler(events) {
 
             }
 
+            //detect if square is already taken
             if(tictactoeState.grid[cmd.row][cmd.column] !== ""){
                 return [{
                     id:cmd.id,
@@ -99,9 +102,7 @@ module.exports = function tictactoeCommandHandler(events) {
                 }];
             }
 
-            var mark = "";
-            var next = "";
-
+            //set up valid move
             if(cmd.currentPlayer === gameCreatedEvent.userName && gameCreatedEvent.aPlayer === "X"){
                 tictactoeState.grid[cmd.row][cmd.column] = "X";
                 mark = "X";
@@ -123,7 +124,8 @@ module.exports = function tictactoeCommandHandler(events) {
                 next = gameCreatedEvent.userName;
             }
 
-            if(readVertical(tictactoeState.grid)){
+            //detect if game has been won
+            if(readVertical(tictactoeState.grid) || readHorizontal(tictactoeState.grid)){
                 tictactoeState.gameOver = true;
                 return[{
                     id: cmd.id,
@@ -135,6 +137,9 @@ module.exports = function tictactoeCommandHandler(events) {
                 }];
             }
 
+            //detect draw situation
+
+            //return valid move that does not end game
             return [{
                 id:cmd.id,
                 event:"MadeMove",
