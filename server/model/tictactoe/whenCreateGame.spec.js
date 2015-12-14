@@ -6,15 +6,17 @@ describe('create game command', function(){
     it('should create game',function(){
         given= [];
         when={
-            id:"1234",
-            gameCommand:"CreateGame",
+            id: "1234",
+            gameId: "1",
+            gameCommand: "CreateGame",
             userName : "Gunnhildur",
-            gameName:"TicTacToeOne",
+            gameName: "TicTacToeOne",
             player: "O",
             timeStamp: "2015.12.02T11:29:44"
         };
         then=[{
             id:"1234",
+            gameId: "1",
             event:"GameCreated",
             userName: "Gunnhildur",
             gameName:"TicTacToeOne",

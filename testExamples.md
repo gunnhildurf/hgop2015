@@ -1,6 +1,6 @@
-Given[Placed(0,0,X), Placed(1,0,X)]
-When[Place(2,0,X)]
-Then[X wins]
+Given[]
+When[CreateGame]
+Then[GameCreated]
 
 Given[Placed(0,0,O), Placed(1,1,O)]
 When[Place(2,2,O)]
@@ -18,10 +18,6 @@ Given[GameCreated()]
 When[O joined]
 Then[ClosePlayers()]
 
-Given[TookTurn(X)]
-When[MakesMove(X)]
-Then[Throw IllegalMoveError]
-
-Given[!GameStarted()]//X has made first move
-When[MakesMove(O)]
-Then[Throw IllegalMoveError]
+Given[MadeMoveinX,Y]
+When[MakeMoveinX,Y]
+Then[IllegalMove]

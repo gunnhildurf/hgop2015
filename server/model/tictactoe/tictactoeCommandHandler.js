@@ -20,6 +20,7 @@ module.exports = function tictactoeCommandHandler(events) {
 
                 return [{
                     id: cmd.id,
+                    gameId: cmd.gameId,
                     event: "GameCreated",
                     userName: cmd.userName,
                     gameName: cmd.gameName,
@@ -47,6 +48,7 @@ module.exports = function tictactoeCommandHandler(events) {
 
                 return [{
                     id: cmd.id,
+                    gameId: gameCreatedEvent.gameId,
                     event: "GameJoined",
                     userName: gameCreatedEvent.userName,
                     otherUserName: cmd.otherUserName,
@@ -81,6 +83,7 @@ module.exports = function tictactoeCommandHandler(events) {
             if(tictactoeState.grid[cmd.row][cmd.column] !== ""){
                 return [{
                     id:cmd.id,
+                    gameId: gameCreatedEvent.gameId,
                     event:"IllegalMove",
                     moveRow: cmd.row,
                     moveColumn: cmd.column,
@@ -93,6 +96,7 @@ module.exports = function tictactoeCommandHandler(events) {
             if(tictactoeState.turn !== cmd.currentPlayer){
                 return [{
                     id:cmd.id,
+                    gameId: gameCreatedEvent.gameId,
                     event:"IllegalMove",
                     moveRow: cmd.row,
                     moveColumn: cmd.column,
@@ -127,6 +131,7 @@ module.exports = function tictactoeCommandHandler(events) {
             if(readVertical(tictactoeState.grid) || readHorizontal(tictactoeState.grid) || readDiagonal(tictactoeState.grid)){
                 return[{
                     id: cmd.id,
+                    gameId: gameCreatedEvent.gameId,
                     event: "GameWon",
                     moveRow: cmd.row,
                     moveColumn: cmd.column,
@@ -139,6 +144,7 @@ module.exports = function tictactoeCommandHandler(events) {
             if(readIfFullGrid(tictactoeState.grid)){
                 return [{
                     id: cmd.id,
+                    gameId: gameCreatedEvent.gameId,
                     event:"GameDraw",
                     moveRow: cmd.row,
                     moveColumn: cmd.column,
@@ -150,6 +156,7 @@ module.exports = function tictactoeCommandHandler(events) {
             //return valid move that does not end game
             return [{
                 id:cmd.id,
+                gameId: gameCreatedEvent.gameId,
                 event:"MadeMove",
                 moveRow: cmd.row,
                 moveColumn: cmd.column,

@@ -7,6 +7,7 @@ describe('make move command', function(){
     it('should make move',function(){
         given= [{
             id:"12347",
+            gameId: "4",
             event:"GameCreated",
             userName: "Gunnhildur",
             gameName:"TheSecondGame",
@@ -15,6 +16,7 @@ describe('make move command', function(){
             timeStamp: "2015.12.02T10:29:44"
         },{
             id:"12347",
+            gameId: "4",
             event:"GameJoined",
             userName: "Gunnhildur",
             otherUserName: "Anna",
@@ -24,6 +26,7 @@ describe('make move command', function(){
         }];
         when={
             id:"12347",
+            gameId: "4",
             gameCommand:"MakeMove",
             row: 0,
             column: 1,
@@ -32,6 +35,7 @@ describe('make move command', function(){
         };
         then=[{
             id:"12347",
+            gameId: "4",
             event:"MadeMove",
             moveRow: 0,
             moveColumn: 1,
@@ -49,6 +53,7 @@ describe('make move command', function(){
     it('should not let player move out of turn',function(){
         given= [{
             id:"12348",
+            gameId: "7",
             event:"GameCreated",
             userName: "Anna",
             gameName:"HulaHoop",
@@ -57,6 +62,7 @@ describe('make move command', function(){
             timeStamp: "2015.12.02T10:29:44"
         },{
             id:"12348",
+            gameId: "7",
             event:"GameJoined",
             userName: "Anna",
             otherUserName: "Gunnhildur",
@@ -66,6 +72,7 @@ describe('make move command', function(){
         }];
         when={
             id:"12348",
+            gameId: "7",
             gameCommand:"MakeMove",
             row: 0,
             column: 2,
@@ -74,6 +81,7 @@ describe('make move command', function(){
         };
         then=[{
             id:"12348",
+            gameId: "7",
             event:"IllegalMove",
             moveRow: 0,
             moveColumn: 2,
@@ -89,6 +97,7 @@ describe('make move command', function(){
     it('should not allow two moves in same place',function(){
         given= [{
             id:"12349",
+            gameId: "8",
             event:"GameCreated",
             userName: "Anna",
             gameName:"Wally",
@@ -97,6 +106,7 @@ describe('make move command', function(){
             timeStamp: "2015.12.02T10:29:44"
         },{
             id:"12349",
+            gameId: "8",
             event:"GameJoined",
             userName: "Anna",
             otherUserName: "Gunnhildur",
@@ -105,6 +115,7 @@ describe('make move command', function(){
             timeStamp: "2015.12.02T11:31:50"
         },{
             id:"12349",
+            gameId: "8",
             event:"MadeMove",
             moveRow: 0,
             moveColumn: 1,
@@ -113,6 +124,7 @@ describe('make move command', function(){
             nextPlayer: "Gunnhildur"}];
         when={
             id:"12349",
+            gameId: "8",
             gameCommand:"MakeMove",
             row: 0,
             column: 1,
@@ -121,6 +133,7 @@ describe('make move command', function(){
         };
         then=[{
             id:"12349",
+            gameId: "8",
             event:"IllegalMove",
             moveRow: 0,
             moveColumn: 1,
@@ -135,6 +148,7 @@ describe('make move command', function(){
     it('should detect vertical victory',function(){
         given= [{
             id:"54321",
+            gameId: "9",
             event:"GameCreated",
             userName: "Moby",
             gameName:"Bob",
@@ -143,6 +157,7 @@ describe('make move command', function(){
             timeStamp: "2015.12.02T10:29:44"
         },{
             id:"54321",
+            gameId: "9",
             event:"GameJoined",
             userName: "Moby",
             otherUserName: "Dick",
@@ -151,6 +166,7 @@ describe('make move command', function(){
             timeStamp: "2015.12.02T11:31:50"
         },{
             id:"54321",
+            gameId: "9",
             event:"MadeMove",
             moveRow: 0,
             moveColumn: 1,
@@ -159,6 +175,7 @@ describe('make move command', function(){
             nextPlayer: "Dick"
         },{
             id:"54321",
+            gameId: "9",
             event:"MadeMove",
             moveRow: 0,
             moveColumn: 0,
@@ -167,6 +184,7 @@ describe('make move command', function(){
             nextPlayer: "Moby"
         },{
             id:"54321",
+            gameId: "9",
             event:"MadeMove",
             moveRow: 1,
             moveColumn: 1,
@@ -175,6 +193,7 @@ describe('make move command', function(){
             nextPlayer: "Dick"
         },{
             id:"54321",
+            gameId: "9",
             event:"MadeMove",
             moveRow: 1,
             moveColumn: 0,
@@ -183,6 +202,7 @@ describe('make move command', function(){
             nextPlayer: "Moby"}];
         when={
             id:"54321",
+            gameId: "9",
             gameCommand:"MakeMove",
             row: 2,
             column: 1,
@@ -191,6 +211,7 @@ describe('make move command', function(){
         };
         then=[{
             id:"54321",
+            gameId: "9",
             event:"GameWon",
             moveRow: 2,
             moveColumn: 1,
@@ -205,6 +226,7 @@ describe('make move command', function(){
     it('should detect horizontal victory',function(){
         given= [{
             id:"543210",
+            gameId: "10",
             event:"GameCreated",
             userName: "Alice",
             gameName:"tictactoeOlympics",
@@ -213,6 +235,7 @@ describe('make move command', function(){
             timeStamp: "2015.12.02T10:29:44"
         },{
             id:"543210",
+            gameId: "10",
             event:"GameJoined",
             userName: "Alice",
             otherUserName: "Bob",
@@ -221,6 +244,7 @@ describe('make move command', function(){
             timeStamp: "2015.12.02T11:31:50"
         },{
             id:"543210",
+            gameId: "10",
             event:"MadeMove",
             moveRow: 2,
             moveColumn: 1,
@@ -229,6 +253,7 @@ describe('make move command', function(){
             nextPlayer: "Alice"
         },{
             id:"543210",
+            gameId: "10",
             event:"MadeMove",
             moveRow: 0,
             moveColumn: 0,
@@ -237,6 +262,7 @@ describe('make move command', function(){
             nextPlayer: "Bob"
         },{
             id:"543210",
+            gameId: "10",
             event:"MadeMove",
             moveRow: 1,
             moveColumn: 0,
@@ -245,6 +271,7 @@ describe('make move command', function(){
             nextPlayer: "Alice"
         },{
             id:"543210",
+            gameId: "10",
             event:"MadeMove",
             moveRow: 0,
             moveColumn: 1,
@@ -253,6 +280,7 @@ describe('make move command', function(){
             nextPlayer: "Bob"
         },{
             id:"543210",
+            gameId: "10",
             event:"MadeMove",
             moveRow: 2,
             moveColumn: 0,
@@ -261,6 +289,7 @@ describe('make move command', function(){
             nextPlayer: "Alice"}];
         when={
             id:"543210",
+            gameId: "10",
             gameCommand:"MakeMove",
             row: 0,
             column: 2,
@@ -269,6 +298,7 @@ describe('make move command', function(){
         };
         then=[{
             id:"543210",
+            gameId: "10",
             event:"GameWon",
             moveRow: 0,
             moveColumn: 2,
@@ -283,6 +313,7 @@ describe('make move command', function(){
     it('should detect diagonal victory',function(){
         given= [{
             id:"90210",
+            gameId: "11",
             event:"GameCreated",
             userName: "Tom",
             gameName:"tictactoeWorldCupFinal",
@@ -291,6 +322,7 @@ describe('make move command', function(){
             timeStamp: "2015.12.02T10:29:43"
         },{
             id:"90210",
+            gameId: "11",
             event:"GameJoined",
             userName: "Tom",
             otherUserName: "Jerry",
@@ -299,6 +331,7 @@ describe('make move command', function(){
             timeStamp: "2015.12.02T11:31:50"
         },{
             id:"90210",
+            gameId: "11",
             event:"MadeMove",
             moveRow: 0,
             moveColumn: 0,
@@ -307,6 +340,7 @@ describe('make move command', function(){
             nextPlayer: "Jerry"
         },{
             id:"90210",
+            gameId: "11",
             event:"MadeMove",
             moveRow: 0,
             moveColumn: 1,
@@ -315,6 +349,7 @@ describe('make move command', function(){
             nextPlayer: "Tom"
         },{
             id:"90210",
+            gameId: "11",
             event:"MadeMove",
             moveRow: 1,
             moveColumn: 1,
@@ -323,6 +358,7 @@ describe('make move command', function(){
             nextPlayer: "Jerry"
         },{
             id:"90210",
+            gameId: "11",
             event:"MadeMove",
             moveRow: 2,
             moveColumn: 1,
@@ -332,6 +368,7 @@ describe('make move command', function(){
         }];
         when={
             id:"90210",
+            gameId: "11",
             gameCommand:"MakeMove",
             row: 2,
             column: 2,
@@ -340,6 +377,7 @@ describe('make move command', function(){
         };
         then=[{
             id:"90210",
+            gameId: "11",
             event:"GameWon",
             moveRow: 2,
             moveColumn: 2,
@@ -354,6 +392,7 @@ describe('make move command', function(){
     it('should detect draw',function(){
         given= [{
             id:"555",
+            gameId: "12",
             event:"GameCreated",
             userName: "Bey",
             gameName:"TourDeTictactoe",
@@ -362,6 +401,7 @@ describe('make move command', function(){
             timeStamp: "2015.12.02T10:29:43"
         },{
             id:"555",
+            gameId: "12",
             event:"GameJoined",
             userName: "Bey",
             otherUserName: "Jay",
@@ -370,6 +410,7 @@ describe('make move command', function(){
             timeStamp: "2015.12.02T11:31:51"
         },{
             id:"555",
+            gameId: "12",
             event:"MadeMove",
             moveRow: 0,
             moveColumn: 0,
@@ -378,6 +419,7 @@ describe('make move command', function(){
             nextPlayer: "Jay"
         },{
             id:"555",
+            gameId: "12",
             event:"MadeMove",
             moveRow: 0,
             moveColumn: 1,
@@ -386,6 +428,7 @@ describe('make move command', function(){
             nextPlayer: "Bey"
         },{
             id:"555",
+            gameId: "12",
             event:"MadeMove",
             moveRow: 1,
             moveColumn: 0,
@@ -394,6 +437,7 @@ describe('make move command', function(){
             nextPlayer: "Jay"
         },{
             id:"555",
+            gameId: "12",
             event:"MadeMove",
             moveRow: 2,
             moveColumn: 0,
@@ -402,6 +446,7 @@ describe('make move command', function(){
             nextPlayer: "Bey"
         },{
             id:"555",
+            gameId: "12",
             event:"MadeMove",
             moveRow: 0,
             moveColumn: 2,
@@ -410,6 +455,7 @@ describe('make move command', function(){
             nextPlayer: "Jay"
         },{
             id:"555",
+            gameId: "12",
             event:"MadeMove",
             moveRow: 1,
             moveColumn: 1,
@@ -418,6 +464,7 @@ describe('make move command', function(){
             nextPlayer: "Bey"
         },{
             id:"555",
+            gameId: "12",
             event:"MadeMove",
             moveRow: 2,
             moveColumn: 1,
@@ -426,6 +473,7 @@ describe('make move command', function(){
             nextPlayer: "Jay"
         },{
             id:"555",
+            gameId: "12",
             event:"MadeMove",
             moveRow: 2,
             moveColumn: 2,
@@ -435,6 +483,7 @@ describe('make move command', function(){
         }];
         when={
             id:"555",
+            gameId: "12",
             gameCommand:"MakeMove",
             row: 1,
             column: 2,
@@ -443,6 +492,7 @@ describe('make move command', function(){
         };
         then=[{
             id:"555",
+            gameId: "12",
             event:"GameDraw",
             moveRow: 1,
             moveColumn: 2,
@@ -451,7 +501,6 @@ describe('make move command', function(){
         }];
 
         var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
-
 
         JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
     });
