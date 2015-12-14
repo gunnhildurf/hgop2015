@@ -3,8 +3,7 @@ module.exports = function tictactoeCommandHandler(events) {
 
     var tictactoeState = {
         grid: [["", "", ""], ["", "", ""], ["", "", ""]],
-        turn: "",
-        gameOver: false
+        turn: ""
     }
 
     var gameCreatedEvent = events[0];
@@ -125,8 +124,7 @@ module.exports = function tictactoeCommandHandler(events) {
             }
 
             //detect if game has been won
-            if(readVertical(tictactoeState.grid) || readHorizontal(tictactoeState.grid)){
-                tictactoeState.gameOver = true;
+            if(readVertical(tictactoeState.grid) || readHorizontal(tictactoeState.grid) || readDiagonal(tictactoeState.grid)){
                 return[{
                     id: cmd.id,
                     event: "GameWon",
@@ -138,6 +136,16 @@ module.exports = function tictactoeCommandHandler(events) {
             }
 
             //detect draw situation
+            if(readIfFullGrid(tictactoeState.grid)){
+                return [{
+                    id: cmd.id,
+                    event:"GameDraw",
+                    moveRow: cmd.row,
+                    moveColumn: cmd.column,
+                    player: cmd.currentPlayer,
+                    nextPlayer: ""
+                }]
+            }
 
             //return valid move that does not end game
             return [{
@@ -147,7 +155,7 @@ module.exports = function tictactoeCommandHandler(events) {
                 moveColumn: cmd.column,
                 mark: mark,
                 player: cmd.currentPlayer,
-                nextPlayer: next,
+                nextPlayer: next
             }];
         }
     };
@@ -177,4 +185,24 @@ function readHorizontal(grid) {
         }
     }
     return false;
+}
+
+function readDiagonal(grid) {
+    if(grid[0][0] === grid[1][1] && grid[1][1] === grid[2][2] && grid[1][1] !== ""){
+        return true;
+    } else if (grid[2][0] === grid[1][1] && grid[1][1] === grid[0][2] && grid[1][1] !== "") {
+        return true;
+    }
+    return false;
+}
+
+function readIfFullGrid(grid) {
+    for(var i = 0; i <= 2; i++){
+        for(var j = 0; j <= 2; j++){
+            if(grid[i][j] === ""){
+                return false;
+            }
+        }
+    }
+    return true;
 }

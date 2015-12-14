@@ -280,77 +280,70 @@ describe('make move command', function(){
 
         JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
     });
-    it('should detect horizontal victory',function(){
+    it('should detect diagonal victory',function(){
         given= [{
-            id:"543210",
+            id:"90210",
             event:"GameCreated",
-            userName: "Alice",
-            gameName:"tictactoeOlympics",
-            aPlayer: "O",
-            bPlayer: "X",
-            timeStamp: "2015.12.02T10:29:44"
+            userName: "Tom",
+            gameName:"tictactoeWorldCupFinal",
+            aPlayer: "X",
+            bPlayer: "O",
+            timeStamp: "2015.12.02T10:29:43"
         },{
-            id:"543210",
+            id:"90210",
             event:"GameJoined",
-            userName: "Alice",
-            otherUserName: "Bob",
-            bPlayer: "X",
-            turn: "Bob",
+            userName: "Tom",
+            otherUserName: "Jerry",
+            bPlayer: "O",
+            turn: "Tom",
             timeStamp: "2015.12.02T11:31:50"
         },{
-            id:"543210",
-            event:"MadeMove",
-            moveRow: 2,
-            moveColumn: 1,
-            mark: "X",
-            player: "Bob",
-            nextPlayer: "Alice"
-        },{
-            id:"543210",
+            id:"90210",
             event:"MadeMove",
             moveRow: 0,
             moveColumn: 0,
-            mark: "O",
-            player: "Alice",
-            nextPlayer: "Bob"
+            mark: "X",
+            player: "Tom",
+            nextPlayer: "Jerry"
         },{
-            id:"543210",
+            id:"90210",
+            event:"MadeMove",
+            moveRow: 0,
+            moveColumn: 1,
+            mark: "O",
+            player: "Jerry",
+            nextPlayer: "Tom"
+        },{
+            id:"90210",
             event:"MadeMove",
             moveRow: 1,
-            moveColumn: 0,
-            mark: "X",
-            player: "Bob",
-            nextPlayer: "Alice"
-        },{
-            id:"543210",
-            event:"MadeMove",
-            moveRow: 0,
             moveColumn: 1,
-            mark: "O",
-            player: "Alice",
-            nextPlayer: "Bob"
+            mark: "X",
+            player: "Tom",
+            nextPlayer: "Jerry"
         },{
-            id:"543210",
+            id:"90210",
             event:"MadeMove",
             moveRow: 2,
-            moveColumn: 0,
-            mark: "X",
-            player: "Bob",
-            nextPlayer: "Alice"}];
+            moveColumn: 1,
+            mark: "O",
+            player: "Jerry",
+            nextPlayer: "Tom"
+        }];
         when={
-            id:"543210",
+            id:"90210",
             gameCommand:"MakeMove",
-            row: 0,
+            row: 2,
             column: 2,
-            currentPlayer: "Alice",
-            nextPlayer: "Bob"
+            currentPlayer: "Tom",
+            nextPlayer: "Jerry"
         };
         then=[{
-            id:"543210",
+            id:"90210",
             event:"GameWon",
-            moveRow: 0,
+            moveRow: 2,
             moveColumn: 2,
-            player: "Alice",
+            player: "Tom",
             nextPlayer: ""
         }];
 
@@ -358,6 +351,108 @@ describe('make move command', function(){
 
         JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
     });
+    it('should detect draw',function(){
+        given= [{
+            id:"555",
+            event:"GameCreated",
+            userName: "Bey",
+            gameName:"TourDeTictactoe",
+            aPlayer: "X",
+            bPlayer: "O",
+            timeStamp: "2015.12.02T10:29:43"
+        },{
+            id:"555",
+            event:"GameJoined",
+            userName: "Bey",
+            otherUserName: "Jay",
+            bPlayer: "O",
+            turn: "Bey",
+            timeStamp: "2015.12.02T11:31:51"
+        },{
+            id:"555",
+            event:"MadeMove",
+            moveRow: 0,
+            moveColumn: 0,
+            mark: "X",
+            player: "Bey",
+            nextPlayer: "Jay"
+        },{
+            id:"555",
+            event:"MadeMove",
+            moveRow: 0,
+            moveColumn: 1,
+            mark: "O",
+            player: "Jay",
+            nextPlayer: "Bey"
+        },{
+            id:"555",
+            event:"MadeMove",
+            moveRow: 1,
+            moveColumn: 0,
+            mark: "X",
+            player: "Bey",
+            nextPlayer: "Jay"
+        },{
+            id:"555",
+            event:"MadeMove",
+            moveRow: 2,
+            moveColumn: 0,
+            mark: "O",
+            player: "Jay",
+            nextPlayer: "Bey"
+        },{
+            id:"555",
+            event:"MadeMove",
+            moveRow: 0,
+            moveColumn: 2,
+            mark: "X",
+            player: "Bey",
+            nextPlayer: "Jay"
+        },{
+            id:"555",
+            event:"MadeMove",
+            moveRow: 1,
+            moveColumn: 1,
+            mark: "O",
+            player: "Jay",
+            nextPlayer: "Bey"
+        },{
+            id:"555",
+            event:"MadeMove",
+            moveRow: 2,
+            moveColumn: 1,
+            mark: "X",
+            player: "Bey",
+            nextPlayer: "Jay"
+        },{
+            id:"555",
+            event:"MadeMove",
+            moveRow: 2,
+            moveColumn: 2,
+            mark: "O",
+            player: "Jay",
+            nextPlayer: "Bey"
+        }];
+        when={
+            id:"555",
+            gameCommand:"MakeMove",
+            row: 1,
+            column: 2,
+            currentPlayer: "Bey",
+            nextPlayer: "Jay"
+        };
+        then=[{
+            id:"555",
+            event:"GameDraw",
+            moveRow: 1,
+            moveColumn: 2,
+            player: "Bey",
+            nextPlayer: ""
+        }];
+
+        var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
 
 
+        JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
+    });
 });
