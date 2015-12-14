@@ -38,9 +38,9 @@ describe('make move command', function(){
             mark: "X",
             player: "Gunnhildur",
             nextPlayer: "Anna",
-            gameWon: false,
-            gameDraw: false
         }];
+
+
 
         var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
 
@@ -78,9 +78,7 @@ describe('make move command', function(){
             moveRow: 0,
             moveColumn: 2,
             player: "Gunnhildur",
-            nextPlayer: "Anna",
-            gameWon: false,
-            gameDraw: false
+            nextPlayer: "Anna"
         }];
 
         var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
@@ -112,9 +110,7 @@ describe('make move command', function(){
             moveColumn: 1,
             mark: "X",
             player: "Anna",
-            nextPlayer: "Gunnhildur",
-            gameWon: false,
-            gameDraw: false}];
+            nextPlayer: "Gunnhildur"}];
         when={
             id:"12349",
             gameCommand:"MakeMove",
@@ -129,15 +125,82 @@ describe('make move command', function(){
             moveRow: 0,
             moveColumn: 1,
             player: "Gunnhildur",
-            nextPlayer: "Gunnhildur",
-            gameWon: false,
-            gameDraw: false
+            nextPlayer: "Gunnhildur"
         }];
-
 
         var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
 
+        JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
+    });
+    it('should detect vertical victory',function(){
+        given= [{
+            id:"54321",
+            event:"GameCreated",
+            userName: "Moby",
+            gameName:"Bob",
+            aPlayer: "X",
+            bPlayer: "O",
+            timeStamp: "2015.12.02T10:29:44"
+        },{
+            id:"54321",
+            event:"GameJoined",
+            userName: "Moby",
+            otherUserName: "Dick",
+            bPlayer: "O",
+            turn: "Moby",
+            timeStamp: "2015.12.02T11:31:50"
+        },{
+            id:"54321",
+            event:"MadeMove",
+            moveRow: 0,
+            moveColumn: 1,
+            mark: "X",
+            player: "Moby",
+            nextPlayer: "Dick"
+        },{
+            id:"54321",
+            event:"MadeMove",
+            moveRow: 0,
+            moveColumn: 0,
+            mark: "O",
+            player: "Dick",
+            nextPlayer: "Moby"
+        },{
+            id:"54321",
+            event:"MadeMove",
+            moveRow: 1,
+            moveColumn: 1,
+            mark: "X",
+            player: "Moby",
+            nextPlayer: "Dick"
+        },{
+            id:"54321",
+            event:"MadeMove",
+            moveRow: 1,
+            moveColumn: 0,
+            mark: "O",
+            player: "Dick",
+            nextPlayer: "Moby"}];
+        when={
+            id:"54321",
+            gameCommand:"MakeMove",
+            row: 2,
+            column: 1,
+            currentPlayer: "Moby",
+            nextPlayer: "Dick"
+        };
+        then=[{
+            id:"54321",
+            event:"GameWon",
+            moveRow: 2,
+            moveColumn: 1,
+            player: "Moby",
+            nextPlayer: ""
+        }];
+
+        var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
 
         JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
     });
+
 });

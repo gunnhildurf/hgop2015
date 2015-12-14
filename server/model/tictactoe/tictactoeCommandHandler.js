@@ -3,7 +3,8 @@ module.exports = function tictactoeCommandHandler(events) {
 
     var tictactoeState = {
         grid: [["", "", ""], ["", "", ""], ["", "", ""]],
-        turn: ""
+        turn: "",
+        gameOver: false
     }
 
     var gameCreatedEvent = events[0];
@@ -58,7 +59,7 @@ module.exports = function tictactoeCommandHandler(events) {
         },
         "MakeMove": function (cmd) {
 
-            var secondUser = "0";
+            var secondUser = "";
 
 
             for(var i = 0; i < events.length; i = i + 1){
@@ -82,13 +83,11 @@ module.exports = function tictactoeCommandHandler(events) {
                     moveRow: cmd.row,
                     moveColumn: cmd.column,
                     player: cmd.currentPlayer,
-                    nextPlayer: cmd.currentPlayer,
-                    gameWon: false,
-                    gameDraw: false
+                    nextPlayer: cmd.currentPlayer
                 }];
             }
 
-
+            //check if move is out of turn
             if(tictactoeState.turn !== cmd.currentPlayer){
                 return [{
                     id:cmd.id,
@@ -96,9 +95,7 @@ module.exports = function tictactoeCommandHandler(events) {
                     moveRow: cmd.row,
                     moveColumn: cmd.column,
                     player: cmd.currentPlayer,
-                    nextPlayer: cmd.nextPlayer,
-                    gameWon: false,
-                    gameDraw: false
+                    nextPlayer: tictactoeState.turn
                 }];
             }
 
@@ -126,9 +123,17 @@ module.exports = function tictactoeCommandHandler(events) {
                 next = gameCreatedEvent.userName;
             }
 
-
-            tictactoeState.turn = cmd.nextPlayer;
-
+            if(readVertical(tictactoeState.grid)){
+                tictactoeState.gameOver = true;
+                return[{
+                    id: cmd.id,
+                    event: "GameWon",
+                    moveRow: cmd.row,
+                    moveColumn: cmd.column,
+                    player: cmd.currentPlayer,
+                    nextPlayer: ""
+                }];
+            }
 
             return [{
                 id:cmd.id,
@@ -138,8 +143,6 @@ module.exports = function tictactoeCommandHandler(events) {
                 mark: mark,
                 player: cmd.currentPlayer,
                 nextPlayer: next,
-                gameWon: false,
-                gameDraw: false
             }];
         }
     };
@@ -151,8 +154,22 @@ module.exports = function tictactoeCommandHandler(events) {
     };
 };
 
-/* helper functions */
+////////////////////////////* HELPER FUNCTIONS */////////////////////////////////////////
 
+function readVertical(grid) {
+    for(var i = 0; i <= 2; i++){
+        if(grid[0][i] === grid[1][i] && grid[1][i] === grid[2][i] && grid[0][i] !== ""){
+            return true;
+        }
+    }
+    return false;
+}
 
-function readVertical() {
+function readHorizontal(grid) {
+    for(var i = 0; i <= 2; i++){
+        if(grid[i][0] === grid[i][1] && grid[i][1] === grid[i][2] && grid[i][0] !== ""){
+            return true;
+        }
+    }
+    return false;
 }
