@@ -19,7 +19,7 @@ describe('join game command', function(){
             gameId:"2",
             gameCommand:"JoinGame",
             otherUserName : "Halli",
-            name:"TheFirstGame",
+            gameName:"TheFirstGame",
             timeStamp: "2015.12.02T11:30:50"
         };
         then=[{
@@ -44,7 +44,7 @@ describe('join game command', function(){
             id:"12345",
             gameCommand:"JoinGame",
             otherUserName : "Halli",
-            name:"TheFirstGame",
+            gameName:"TheFirstGame",
             timeStamp: "2015.12.02T11:30:55"
         };
         then=[{

@@ -16,7 +16,7 @@ function given(userApi) {
   var _currentEvent = 0;
   var expectApi = {
     withName: function (gameName) {
-      _expectedEvents[_currentEvent].name = gameName;
+      _expectedEvents[_currentEvent].gameName = gameName;
       return expectApi;
     },
     expect: function (eventName) {
@@ -59,7 +59,7 @@ function user(userName) {
         gameId: gameId,
         gameCommand: "CreateGame",
         userName: userName,
-        gameName: gameId,
+        gameName: "TheFirstGame",
         player: "X",
         timeStamp: "2014-12-02T11:29:29"
       };

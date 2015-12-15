@@ -4,7 +4,10 @@ Express server listening on 9000, in development mode
 [0m  TEST ENV GET /api/gameHistory[0m
 [2K[0G  [32m  ✓[0m[90m Should have ACCEPTANCE_URL environment variable exported. [0m
 [2K[0G  [32m  ✓[0m[90m should execute same test using old style [0m
+[90mPOST /api/createGame [32m200 [90m12ms - 166b[0m
+[90mGET /api/gameHistory/3535561 [32m200 [90m2ms - 166b[0m
+[2K[0G  [32m  ✓[0m[90m Should execute fluid API test [0m[33m(74ms)[0m
 
 
-[92m [0m[32m 2 passing[0m[90m (51ms)[0m
+[92m [0m[32m 3 passing[0m[90m (119ms)[0m
 
