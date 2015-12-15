@@ -57,4 +57,5 @@ describe('create game command', function(){
         JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
     });
 
+
 });
