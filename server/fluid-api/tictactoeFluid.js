@@ -1,6 +1,6 @@
 var should = require('should');
 var request = require('supertest');
-var acceptanceUrl = process.env.ACCEPTANCE_URL;
+var acceptanceUrl = require('../app'); // process.env.ACCEPTANCE_URL;
 
 function given(userApi) {
   var _expectedEvents=[{
@@ -8,7 +8,9 @@ function given(userApi) {
     "gameId": userApi._command.gameId,
     "event": "EventName",
     "userName": userApi._command.userName,
-    "name": userApi._command.gameId,
+    "gameName": userApi._command.gameName,
+    "aPlayer": "X",
+    "bPlayer": "O",
     "timeStamp": "2014-12-02T11:29:29"
   }];
   var _currentEvent = 0;
@@ -55,9 +57,10 @@ function user(userName) {
       userApi._command = {
         id: "1234",
         gameId: gameId,
-        comm: "CreateGame",
+        gameCommand: "CreateGame",
         userName: userName,
-        name: gameId,
+        gameName: gameId,
+        player: "X",
         timeStamp: "2014-12-02T11:29:29"
       };
       return userApi;
