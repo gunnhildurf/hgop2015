@@ -1,3 +1,5 @@
 #!/usr/bin/bash
+url="$1"
+port="$2"
 
-export ACCEPTANCE_URL=http://192.168.33.15:9000 && export PATH="/usr/local/bin:$PATH" && npm install && grunt mochaTest:acceptance
+export ACCEPTANCE_URL=http://$ip:$port && export PATH="/usr/local/bin:$PATH" && npm install && grunt mochaTest:acceptance

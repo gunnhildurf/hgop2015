@@ -6,6 +6,6 @@ Yeoman landing síðan er á http://192.168.33.15:9000/ og Jenkins er á http://
 
 //////// TO DO ///////
 
-* Fix report
 * Fix acceptance script
+* Setja upp pípuna á Jenkins
 * Fix test examples
