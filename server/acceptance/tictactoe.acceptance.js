@@ -9,7 +9,7 @@ var user = require('../fluid-api/tictactoeFluid').user;
 
 describe('TEST ENV GET /api/gameHistory', function () {
 
-  var pseudorandomId = Math.floor((Math.random()) * 10000000).toString();
+  var pseudorandomId = Math.floor((Math.random() + 1) * 10000000).toString();
   var url = '/api/gameHistory/' + pseudorandomId;
 
   it('Should have ACCEPTANCE_URL environment variable exported.', function () {
