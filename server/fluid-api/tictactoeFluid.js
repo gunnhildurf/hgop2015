@@ -1,6 +1,6 @@
 var should = require('should');
 var request = require('supertest');
-var acceptanceUrl = process.env.ACCEPTANCE_URL;
+var acceptanceUrl = require('../app'); //process.env.ACCEPTANCE_URL;
 
 function given(userApi) {
   var _expectedEvents=[{
