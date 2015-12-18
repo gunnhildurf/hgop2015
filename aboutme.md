@@ -1,5 +1,5 @@
 
-Gunnhildur Finnsdóttir
+###Gunnhildur Finnsdóttir
 
 Ég er að austan, litla frænka Þrastar og Aðalbjarnar. Þú komst stundum að leika við þá hjá ömmu okkar á Gunnlaugsstöðum.
 

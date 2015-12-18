@@ -1,10 +1,22 @@
+//Create game
 Given[]
+
 When[CreateGame]
+
 Then[GameCreated]
 
-Given[Placed(0,0,O), Placed(1,1,O)]
-When[Place(2,2,O)]
-Then[O wins]
+//Join game
+
+Given[GameCreated]
+
+When[JoinGame(userName)]
+
+Then[JoinedGame(userName)]
+
+
+Given[Placed(0,0,X), Placed(1,1,X)]
+When[Place(2,2,X)]
+Then[X wins]
 
 Given[Placed(1,2,X), Placed(1,1,X)]
 When[Place(1,0,X)]

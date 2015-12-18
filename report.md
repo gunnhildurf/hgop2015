@@ -13,7 +13,7 @@ JavaScript task runner sem gerir endurtekningasöm verk eins og einingapróf sj�
 Package manager fyrir Node. Hjartað í honum er package.json þar sem öll dependency fyrir hugbúnað eru skilgreind, bæði þau sem þarf til að keyra hugbúnaðinn og þau sem þarf við þróun. Þegar package.json er til staðar er hægt að gera npm install og þá sækir npm allt sem til þarf.
 
 ###nodejs:
-JavaScript umhverfi fyrir bakenda og netsamskiptaforrit.
+Open source JavaScript runtime umhverfi fyrir bakenda og netsamskiptaforrit. Það er byggt á V8 Chrome JavaScript engine. Node notar event-driven uppbyggingu og hefur non-blocking inntak og úrtak, hvort tveggja auðveldar það að skala node kerfi upp.
 
 ###bower:
 Package manager fyrir framenda sem hefur svipaða virkni og npm. Hefur þann stóra galla að hann tryggir ekki að pakkar séu óbreyttir, þ.e. sú útgáfa sem er tiltekin í verkefni.
