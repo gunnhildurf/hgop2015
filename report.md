@@ -20,3 +20,24 @@ Package manager fyrir framenda sem hefur svipaða virkni og npm. Hefur þann st�
 
 ###Deployment Path á degi 2:
 Við erum búin að aðskilja þróun og prófanir í sitthvort Docker umhverfið sem keyra í centOs sýndarvél. Þar sem við notum Docker til að builda forritið þá erum við ekki lengur sek um það release antipattern að keyra source kóðann okkar beint áfram heldur erum við að deploya binaries. Við erum líka búin að taka fyrsta skrefið í áttina að því að gera ferlið sjálfvirkt með því að gera skriftu sem sækir nýjustu útgáfu af Dockerhub og keyrir á test umhverfinu, en erum þó enn að setja hana af stað í höndunum. Við erum því enn sem komið er með það release antipattern að deploya sjálf.
+
+###Skil:
+Ég kláraði liði 1-7 af verkefnalýsingunni og setti upp build pipeline view í Jenkins en komst því miður ekki lengra.
+
+Yeoman landing síðan er á http://192.168.33.15:9000/ og Jenkins er á http://192.168.33.15:8080/
+
+Jenkins pípan samanstendur af 3 projectum sem eru tengd í þessari röð:
+
+#####1) HGOP
+
+Build trigger er "Poll SCM", Schedule er H/2 * * * *
+
+Build command er: export DISPLAY=:0 && export PATH="/usr/local/bin:$PATH" && bower install && npm install && ./dockerbuild.s
+
+#####2) test_environment
+
+Build command er: ./deploy_script.sh 192.168.33.15
+
+#####3) acceptance
+
+Build command er: ./acceptance_script.sh 192.168.33.15 9000
