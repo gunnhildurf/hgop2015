@@ -6,7 +6,9 @@ Yeoman landing síðan er á http://192.168.33.15:9000/ og Jenkins er á http://
 
 //////// TO DO ///////
 
-* Bæta við í report um node
+
 * Fix test examples
+* Setja Jenkins skriftur í skil
+* Skila
 * Skoða nr 7 og 8
 * Lesa um fluid-api
