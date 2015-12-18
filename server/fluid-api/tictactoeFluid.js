@@ -11,7 +11,7 @@ function given(userApi) {
     "gameName": userApi._command.gameName,
     "aPlayer": "X",
     "bPlayer": "O",
-    "timeStamp": userApi._command.timestamp
+    "timeStamp": userApi._command.timeStamp
   }];
   var _currentEvent = 0;
   var expectApi = {
