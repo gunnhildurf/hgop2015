@@ -4,14 +4,14 @@ var acceptanceUrl = require('../app'); //process.env.ACCEPTANCE_URL;
 
 function given(userApi) {
   var _expectedEvents=[{
-    "id": "1234",
+    "id": userApi._command.id,
     "gameId": userApi._command.gameId,
     "event": "EventName",
     "userName": userApi._command.userName,
     "gameName": userApi._command.gameName,
     "aPlayer": "X",
     "bPlayer": "O",
-    "timeStamp": "2014-12-02T11:29:29"
+    "timeStamp": userApi._command.timestamp
   }];
   var _currentEvent = 0;
   var expectApi = {
